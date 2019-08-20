@@ -4,9 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Vue. Lavrik</title>
 </head>
 <body>
   
+  <div class="wrapper">
+    <div class="sample">
+      <input type="text"
+      			 v-model = "firstName">
+      <hr>
+	
+	    <input type="text"
+      			 v-model = "lastName">
+      <hr>
+
+
+      <h2 v-if="showH2"> Hello, {{ firstName + lastName }} </h2>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+
+  <script> 
+
+  	function getSale(code, callback) {
+  		let codes {
+  			newYear: 10,
+  			some: 20,
+  		}
+
+  		let sale = (codes[code] !== undefined) ? codes[code] : 0;
+
+  		setTimeout(() => {
+  			callback(sale);
+  		}); 
+  	}
+
+		let vue = new Vue({
+			el: '.sample',
+			data: {
+				firstName: 'anatol',
+				lastName: 'ao',
+				showH2: true,
+				promo: '',
+				sale: 0;
+			}, 
+			methods: {
+
+			},
+			watch: {
+				promo() {
+					getSale(this.promo, (sale) => {
+						this.sale = sale
+					});
+				}
+			}
+		});
+
+  </script>
 </body>
 </html>
